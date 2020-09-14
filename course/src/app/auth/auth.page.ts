@@ -1,4 +1,6 @@
+import { NgForOf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { AuthService } from './auth.service';
@@ -10,6 +12,7 @@ import { AuthService } from './auth.service';
 })
 export class AuthPage implements OnInit {
   isLoading = false;
+  isLogin = true;
 
   constructor(
     private authService: AuthService,
@@ -35,4 +38,23 @@ export class AuthPage implements OnInit {
       }, 1500);
     });
   }
+
+  onSubmit(form: NgForm) {
+    if (!form.valid) {
+      return;
+    }
+    const email = form.value.email;
+    const password = form.value.password;
+
+    if (this.isLogin) {
+      // Send a request to login servers
+    } else {
+      // Send a request to signup servers
+    }
+  }
+
+  onSwitchAuthMode() {
+    this.isLogin = !this.isLogin;
+  }
+
 }
